@@ -1,19 +1,31 @@
 'use client'
-import Image from 'next/image'
+
+import { useState, useEffect } from 'react'
 
 export default function Home() {
+  // const [state, setState] = useState('')
+
+  function handleState() {
+    // The play method exists on HTMLAudioElement and not HTMLElement. getElementById returns HTMLElement | null, so you'd have to cast mytrack as HTMLAudioElement for TypeScript to allow it. https://stackoverflow.com/a/55270654/13658418
+    const drumPad = document.getElementById('drum-pad-q')?.firstChild as HTMLAudioElement
+    drumPad.play()
+    console.log('Playing: ', drumPad)
+  }
+
   return (
     <div className="flex flex-col items-center h-screen">
       <header>Drum Machine</header>
 
       <main className="grid place-items-center">
         <div id="drum-machine">
-          <div id="display-box" className="w-40 h-10 grid place-items-center">
+          <div id="display-box" className="grid place-items-center">
             <h2>Display</h2>
-            <div id="display"></div>
+            <div id="display" className="w-40 h-10 bg-red-500">
+              {/* {state} */}
+            </div>
           </div>
           <div id="drum-pad-box" className="grid grid-cols-3 grid-rows-3 place-items-center">
-            <div id="drum-pad-q" className="drum-pad">
+            <div id="drum-pad-q" className="drum-pad w-full bg-red-400" onClick={handleState}>
               <audio
                 id="Q"
                 className="clip"
