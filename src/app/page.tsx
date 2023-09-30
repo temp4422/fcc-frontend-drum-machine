@@ -7,12 +7,10 @@ export default function Home() {
 
   function handleEvent() {
     // The play method exists on HTMLAudioElement and not HTMLElement. getElementById returns HTMLElement | null, so you'd have to cast mytrack as HTMLAudioElement for TypeScript to allow it. https://stackoverflow.com/a/55270654/13658418
-    // const drumPad = document.getElementById('drum-pad-q')?.firstChild as HTMLAudioElement
-
-    // drumPad.play()
-    // console.log('Playing: ', drumPad)
-    // setState(drumPad.id)
-    console.log('Pressed: ', document.activeElement)
+    const drumPad = document.activeElement?.firstChild as HTMLAudioElement
+    drumPad.play()
+    setState(drumPad.id)
+    console.log('Playing: ', drumPad)
   }
 
   useEffect(() => {
@@ -32,7 +30,7 @@ export default function Home() {
           <div id="display-box" className="grid place-items-center">
             <h2>Display</h2>
             <div id="display" className="w-40 h-10 bg-red-500">
-              {state}
+              {state} {/* Display pressed key */}
             </div>
           </div>
 
@@ -119,7 +117,7 @@ export default function Home() {
         Made by <a href="https://github.com/webdev4422/fcc-frontend-drum-machine">webdev4422</a>
       </footer>
 
-      {/* <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script> */}
+      <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
     </div>
   )
 }
