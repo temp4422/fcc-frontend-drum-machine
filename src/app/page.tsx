@@ -43,15 +43,18 @@ export default function Home() {
   })
 
   return (
-    <div className="flex flex-col items-center h-screen">
-      <header>Drum Machine</header>
+    // <div className="flex flex-col items-center h-screen ">
+    <div className="root text-center">
+      <header className="text-xl m-4">Drum Machine</header>
 
       <main className="grid place-items-center">
         <div id="drum-machine">
           {/* Display */}
           <div id="display-box" className="grid place-items-center">
-            <h2>Display</h2>
-            <div id="display" className="w-40 h-10 bg-red-500">
+            <div
+              id="display"
+              className="w-32 h-10 mb-4 bg-slate-400 rounded-md grid place-items-center"
+            >
               {state} {/* Display pressed key */}
             </div>
           </div>
@@ -59,7 +62,7 @@ export default function Home() {
           {/* Drum-pad */}
           <div id="drum-pad-box" className="grid grid-cols-3 grid-rows-3 place-items-center">
             {/* Q */}
-            <button id="drum-pad-q" className="drum-pad w-full bg-red-400">
+            <button id="drum-pad-q" className="drum-pad">
               <audio
                 id="Q"
                 className="clip"
@@ -135,7 +138,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer>
+      <footer className="text-sm">
         Made by <a href="https://github.com/webdev4422/fcc-frontend-drum-machine">webdev4422</a>
       </footer>
 
