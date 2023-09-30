@@ -1,11 +1,12 @@
 'use client'
 
+import { ok } from 'assert'
 import { useState, useEffect } from 'react'
 
 export default function Home() {
   const [state, setState] = useState('')
 
-  function handleEvent(e: any) {
+  function handleClick(e: any) {
     // The play method exists on HTMLAudioElement and not HTMLElement. getElementById returns HTMLElement | null, so you'd have to cast mytrack as HTMLAudioElement for TypeScript to allow it. https://stackoverflow.com/a/55270654/13658418
     // const drumPad = document.activeElement?.firstChild as HTMLAudioElement
     const drumPad = e.target.firstChild as HTMLAudioElement // Alternative use event object
@@ -14,11 +15,31 @@ export default function Home() {
     console.log('Playing: ', drumPad, 'Event type: ', e.type)
   }
 
+  function handleKeyPress(e: any) {
+    const buttons = document.querySelectorAll('button')
+
+    for (const button of buttons) {
+      let drumPad = button.firstChild as HTMLAudioElement // TypeScript Check type
+
+      if (drumPad) {
+        // If our key == audio id, play that audio
+        if (e.key.toUpperCase() == drumPad.id) {
+          drumPad.play()
+          setState(drumPad.id)
+          console.log('Playing: ', drumPad, 'Event type: ', e.type)
+        }
+      }
+    }
+  }
+
   useEffect(() => {
+    // Handle click
     const buttons = document.querySelectorAll('button.drum-pad')
     for (let button of buttons) {
-      button.addEventListener('click', handleEvent)
+      button.addEventListener('click', handleClick)
     }
+    // Handle keypress
+    document.addEventListener('keypress', handleKeyPress)
   })
 
   return (
