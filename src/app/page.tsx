@@ -8,9 +8,12 @@ export default function Home() {
   function handleEvent() {
     // The play method exists on HTMLAudioElement and not HTMLElement. getElementById returns HTMLElement | null, so you'd have to cast mytrack as HTMLAudioElement for TypeScript to allow it. https://stackoverflow.com/a/55270654/13658418
     const drumPad = document.activeElement?.firstChild as HTMLAudioElement
-    drumPad.play()
-    setState(drumPad.id)
-    console.log('Playing: ', drumPad)
+    // Fix error "TypeError: drumPad is null"
+    if (drumPad) {
+      drumPad.play()
+      setState(drumPad.id)
+      console.log('Playing: ', drumPad)
+    }
   }
 
   useEffect(() => {
