@@ -1,7 +1,16 @@
 'use client'
-
-import { ok } from 'assert'
 import { useState, useEffect } from 'react'
+
+const DATA = [
+  {
+    id: 'Q',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3',
+  },
+  {
+    id: 'W',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3',
+  },
+]
 
 export default function Home() {
   const [state, setState] = useState('')
@@ -33,15 +42,33 @@ export default function Home() {
     }
   }
 
-  useEffect(() => {
-    // Handle click
-    const buttons = document.querySelectorAll('button.drum-pad')
-    for (let button of buttons) {
-      button.addEventListener('click', handleClick)
-    }
-    // Handle keypress
-    document.addEventListener('keypress', handleKeyPress)
-  })
+  // useEffect(() => {
+  // // Handle click
+  // const buttons = document.querySelectorAll('button.drum-pad')
+  // for (let button of buttons) {
+  //   button.addEventListener('click', handleClick)
+  // }
+  // // Handle keypress
+  // document.addEventListener('keypress', handleKeyPress)
+  // })
+
+  const mappedButtons = DATA.map((item) => (
+    <button
+      key={item.id}
+      id="drum-pad-q"
+      className="drum-pad"
+      onClick={handleClick}
+      onKeyDown={handleKeyPress}
+      >
+      {/* prettier-ignore */}
+      <audio
+        id={item.id}
+        className="clip"
+        src={item.url}
+      ></audio>
+      {item.id}
+    </button>
+  ))
 
   return (
     // <div className="flex flex-col items-center h-screen ">
@@ -62,79 +89,8 @@ export default function Home() {
 
           {/* Drum-pad */}
           <div id="drum-pad-box" className="grid grid-cols-3 grid-rows-3 place-items-center">
-            {/* Q */}
-            <button id="drum-pad-q" className="drum-pad">
-              <audio
-                id="Q"
-                className="clip"
-                src="https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3"
-              ></audio>
-              Q
-            </button>
-            <button id="drum-pad-w" className="drum-pad">
-              <audio
-                id="W"
-                className="clip"
-                src="https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3"
-              ></audio>
-              W
-            </button>
-            <button id="drum-pad-e" className="drum-pad">
-              <audio
-                id="E"
-                className="clip"
-                src="https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3"
-              ></audio>
-              E
-            </button>
-            <button id="drum-pad-a" className="drum-pad">
-              <audio
-                id="A"
-                className="clip"
-                src="https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3"
-              ></audio>
-              A
-            </button>
-            <button id="drum-pad-s" className="drum-pad">
-              <audio
-                id="S"
-                className="clip"
-                src="https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3"
-              ></audio>
-              S
-            </button>
-            <button id="drum-pad-d" className="drum-pad">
-              <audio
-                id="D"
-                className="clip"
-                src="https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3"
-              ></audio>
-              D
-            </button>
-            <button id="drum-pad-z" className="drum-pad">
-              <audio
-                id="Z"
-                className="clip"
-                src="https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3"
-              ></audio>
-              Z
-            </button>
-            <button id="drum-pad-x" className="drum-pad">
-              <audio
-                id="X"
-                className="clip"
-                src="https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3"
-              ></audio>
-              X
-            </button>
-            <button id="drum-pad-c" className="drum-pad">
-              <audio
-                id="C"
-                className="clip"
-                src="https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3"
-              ></audio>
-              C
-            </button>
+            {/* Maped buttons */}
+            {mappedButtons}
           </div>
         </div>
       </main>
