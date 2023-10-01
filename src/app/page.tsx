@@ -16,56 +16,25 @@ export default function Home() {
   const [state, setState] = useState('')
 
   function handleClick(e: any) {
-    // The play method exists on HTMLAudioElement and not HTMLElement. getElementById returns HTMLElement | null, so you'd have to cast mytrack as HTMLAudioElement for TypeScript to allow it. https://stackoverflow.com/a/55270654/13658418
-    // const drumPad = document.activeElement?.firstChild as HTMLAudioElement
-    const drumPad = e.target.firstChild as HTMLAudioElement // Alternative use event object
+    const drumPad = e.target.firstChild as HTMLAudioElement
     drumPad.play()
     setState(drumPad.id)
     console.log('Playing: ', drumPad, 'Event type: ', e.type)
   }
 
   function handleKeyPress(e: any) {
-    const buttons = document.querySelectorAll('button')
+    const drumPad = e.target.firstChild as HTMLAudioElement
 
-    for (const button of buttons) {
-      let drumPad = button.firstChild as HTMLAudioElement // TypeScript Check type
-
-      if (drumPad) {
-        // If our key == audio id, play that audio
-        if (e.key.toUpperCase() == drumPad.id) {
-          drumPad.play()
-          // button.classList.add('active')
-          setState(drumPad.id)
-          console.log('Playing: ', drumPad, 'Event type: ', e.type)
-        }
-      }
+    if (e.key.toUpperCase() == drumPad.id) {
+      drumPad.play()
+      setState(drumPad.id)
+      console.log('Playing: ', drumPad, 'Event type: ', e.type)
     }
   }
 
-  // useEffect(() => {
-  // // Handle click
-  // const buttons = document.querySelectorAll('button.drum-pad')
-  // for (let button of buttons) {
-  //   button.addEventListener('click', handleClick)
-  // }
-  // // Handle keypress
-  // document.addEventListener('keypress', handleKeyPress)
-  // })
-
   const mappedButtons = DATA.map((item) => (
-    <button
-      key={item.id}
-      id="drum-pad-q"
-      className="drum-pad"
-      onClick={handleClick}
-      onKeyDown={handleKeyPress}
-      >
-      {/* prettier-ignore */}
-      <audio
-        id={item.id}
-        className="clip"
-        src={item.url}
-      ></audio>
+    <button key={item.id} className="drum-pad" onClick={handleClick} onKeyDown={handleKeyPress}>
+      <audio id={item.id} className="clip" src={item.url}></audio>
       {item.id}
     </button>
   ))
