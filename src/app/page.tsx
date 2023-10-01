@@ -25,6 +25,7 @@ export default function Home() {
         // If our key == audio id, play that audio
         if (e.key.toUpperCase() == drumPad.id) {
           drumPad.play()
+          // button.classList.add('active')
           setState(drumPad.id)
           console.log('Playing: ', drumPad, 'Event type: ', e.type)
         }
