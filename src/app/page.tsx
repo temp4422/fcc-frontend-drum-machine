@@ -84,7 +84,7 @@ export default function Home() {
         Made by <a href="https://github.com/webdev4422/fcc-frontend-drum-machine">webdev4422</a>
       </footer>
 
-      <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+      <script defer src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
     </div>
   )
 }
