@@ -23,18 +23,29 @@ export default function Home() {
     console.log('Playing: ', drumPad, 'Event type: ', e.type)
   }
 
-  function handleKeyPress(e: any) {
-    const drumPad = e.target.firstChild as HTMLAudioElement
+  // Handle 'keydown' event separately (global), because the buttons is not focused with keyboard, only with mouse (handleClick)
+  function handleKeyDown(e: any) {
+    // Check if current key is found in DATA
+    const audio = DATA.find((item) => item.id == e.key.toUpperCase())
 
-    if (e.key.toUpperCase() == drumPad.id) {
+    if (audio) {
+      // Find element by id and trigger play()
+      const drumPad = document.getElementById(audio.id) as HTMLAudioElement
       drumPad.play()
       setDisplay(drumPad.id)
       console.log('Playing: ', drumPad, 'Event type: ', e.type)
     }
   }
+  document.addEventListener('keydown', handleKeyDown)
 
+  // Map buttons
   const mappedButtons = DATA.map((item) => (
-    <button key={item.id} className="drum-pad" onClick={handleClick} onKeyDown={handleKeyPress}>
+    <button
+      key={item.id}
+      className="drum-pad"
+      onClick={handleClick}
+      // onKeyDown={handleKeyDown} // Handled separately because it's global
+    >
       <audio id={item.id} className="clip" src={item.src}></audio>
       {item.id}
     </button>
