@@ -17,8 +17,9 @@ export default function Home() {
   const [display, setDisplay] = useState('')
 
   function handleClick(e: any) {
+    // Find element by focus event.target and trigger play()
     const drumPad = e.target.firstChild as HTMLAudioElement
-    drumPad.play()
+    drumPad.play().catch((e) => console.log(e)) // Handle promise callback https://stackoverflow.com/a/62963021/13658418
     setDisplay(drumPad.id)
     console.log('Playing: ', drumPad, 'Event type: ', e.type)
   }
@@ -31,17 +32,20 @@ export default function Home() {
     if (audio) {
       // Find element by id and trigger play()
       const drumPad = document.getElementById(audio.id) as HTMLAudioElement
-      drumPad.play()
+      drumPad.play().catch((e) => console.log(e))
       setDisplay(drumPad.id)
       console.log('Playing: ', drumPad, 'Event type: ', e.type)
     }
   }
-  document.addEventListener('keydown', handleKeyDown)
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown)
+  })
 
   // Map buttons
   const mappedButtons = DATA.map((item) => (
     <button
       key={item.id}
+      id={item.id + '-button'}
       className="drum-pad"
       onClick={handleClick}
       // onKeyDown={handleKeyDown} // Handled separately because it's global
