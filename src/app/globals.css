@@ -21,24 +21,3 @@ body {
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
     rgb(var(--background-start-rgb));
 }
-
-.root {
-  height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-}
-
-.drum-pad {
-  width: 2.5rem;
-  height: 2rem;
-  background: slategray;
-  border-radius: 5px;
-  margin: 0.2rem;
-  box-shadow: 0 2px #666;
-}
-/* Mouse click */
-.drum-pad:active {
-  background-color: red;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}

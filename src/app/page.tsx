@@ -46,7 +46,7 @@ export default function Home() {
     <button
       key={item.id}
       id={item.id + '-button'}
-      className="drum-pad"
+      className="w-20 h-16 m-2 bg-slate-500 border-b-4 border-slate-300 rounded-2xl active:bg-red-500 active:translate-y-2"
       onClick={handleClick}
       // onKeyDown={handleKeyDown} // Handled separately because it's global
     >
@@ -56,17 +56,16 @@ export default function Home() {
   ))
 
   return (
-    // <div className="flex flex-col items-center h-screen ">
-    <div className="root text-center">
-      <header className="text-xl m-4">Drum Machine</header>
+    <div className="h-screen grid grid-rows-[auto_1fr_auto] text-center">
+      <header className="text-2xl m-8">Drum Machine</header>
 
-      <main className="grid place-items-center">
-        <div id="drum-machine">
+      <main className="flex flex-col items-center">
+        <div id="drum-machine" className="flex flex-col items-center">
           {/* Display */}
           <div id="display-box" className="grid place-items-center">
             <div
               id="display"
-              className="w-32 h-10 mb-4 bg-slate-400 rounded-md grid place-items-center"
+              className="w-32 h-16 mb-4 bg-slate-400 rounded-2xl grid place-items-center"
             >
               {display} {/* Display pressed key */}
             </div>
