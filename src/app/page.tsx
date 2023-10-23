@@ -46,7 +46,7 @@ export default function Home() {
     <button
       key={item.id}
       id={item.id + '-button'}
-      className="w-20 h-16 m-2 bg-slate-500 border-b-4 border-slate-300 rounded-2xl active:bg-red-500 active:translate-y-2"
+      className="drum-pad w-20 h-16 m-2 bg-slate-500 border-b-4 border-slate-300 rounded-2xl active:bg-red-500 active:translate-y-2"
       onClick={handleClick}
       // onKeyDown={handleKeyDown} // Handled separately because it's global
     >
